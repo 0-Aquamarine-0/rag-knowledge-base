@@ -2,8 +2,10 @@ package com.sera.ragknowledgebase;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class RagKnowledgeBaseApplication {
 
     public static void main(String[] args) {
