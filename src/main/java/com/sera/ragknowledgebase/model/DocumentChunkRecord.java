@@ -9,10 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chunk {
+public class DocumentChunkRecord {
 
     private String documentId;
     private String fileName;
-    private Integer index;
+    private String contentType;
+    private Integer chunkIndex;
+    private Integer contentLength;
     private String content;
+    private String vectorId;
 }

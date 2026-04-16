@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chunk {
+public class ChunkVector {
 
-    private String documentId;
-    private String fileName;
-    private Integer index;
+    private Integer chunkIndex;
     private String content;
+    private List<Double> embedding;
 }

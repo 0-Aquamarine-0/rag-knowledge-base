@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chunk {
+public class DocumentChunkSaveResult {
 
-    private String documentId;
-    private String fileName;
-    private Integer index;
-    private String content;
+    private String repositoryName;
+    private Integer savedCount;
+    private String filePath;
 }

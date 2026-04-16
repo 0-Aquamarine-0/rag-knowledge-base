@@ -8,6 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,9 +34,21 @@ class DocumentControllerTest {
 
         mockMvc.perform(multipart("/api/documents/upload").file(file))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.documentId").isNotEmpty())
                 .andExpect(jsonPath("$.fileName").value("sample.txt"))
                 .andExpect(jsonPath("$.chunkCount").value(1))
+                .andExpect(jsonPath("$.vectorStore").value("in-memory"))
+                .andExpect(jsonPath("$.storedVectorCount").value(1))
+                .andExpect(jsonPath("$.vectorIds[0]").isNotEmpty())
+                .andExpect(jsonPath("$.chunkRepository").value("local-json-file"))
+                .andExpect(jsonPath("$.savedChunkMetadataCount").value(1))
+                .andExpect(jsonPath("$.chunkMetadataFilePath").isNotEmpty())
+                .andExpect(jsonPath("$.chunks[0].documentId").isNotEmpty())
+                .andExpect(jsonPath("$.chunks[0].fileName").value("sample.txt"))
                 .andExpect(jsonPath("$.chunks[0].content").isNotEmpty());
+
+        Path metadataFilePath = Path.of("target/document-chunks.json");
+        assertTrue(Files.exists(metadataFilePath));
     }
 
     @Test

@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chunk {
+public class VectorStoreUpsertResult {
 
-    private String documentId;
-    private String fileName;
-    private Integer index;
-    private String content;
+    private String storeName;
+    private Integer storedCount;
+    private List<String> vectorIds;
 }
